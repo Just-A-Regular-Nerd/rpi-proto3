@@ -1,0 +1,16 @@
+{
+  "name": "rpi-proto3",
+  "version": "1.0.0",
+  "description": "NodeJS practice implementation of WebSockets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "JustARegularNerd",
+  "license": "LGPL-3.0-only",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
