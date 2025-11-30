@@ -11,6 +11,10 @@
   "license": "LGPL-3.0-only",
   "type": "commonjs",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "midi": "^2.0.0",
+    "play-sound": "^1.1.6",
+    "speaker": "^0.5.5",
+    "tone": "^15.1.22"
   }
 }

@@ -1,6 +1,6 @@
-# WebSocket Project
+# Server MIDI Piano
 
-This project is an evolution of [rpi-proto2](https://github.com/Just-A-Regular-Nerd/rpi-proto2) such that it is still a WebSocket server and client, but implemented in NodeJS instead of Python.
+This project is an evolution of [rpi-proto2](https://github.com/Just-A-Regular-Nerd/rpi-proto2) such that it still has a client and server, but no longer uses WebSockets (for now at least)
 
 The project goal is to make a **web-based MIDI piano**, but the sound plays on the server (host) instead of the client.
 
@@ -24,4 +24,4 @@ Clone the repository, then open a terminal within the repo directory and run:
 
 `node server.js`
 
-You should be able to then navigate to http://localhost:3000
+You should be able to then navigate to http://localhost:3000    
