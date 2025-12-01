@@ -1,14 +1,14 @@
 // MIDI note mapping
-const MIDI_NOTES = {
-    'C4': 60,
-    'D4': 62,
-    'E4': 64,
-    'F4': 65,
-    'G4': 67,
-    'A4': 69,
-    'B4': 71,
-    'C5': 72
-};
+const MIDI_NOTES = [
+    'C4',
+    'D4',
+    'E4',
+    'F4',
+    'G4',
+    'A4',
+    'B4',
+    'C5'
+];
 
 class MIDIController {
     constructor() {
@@ -18,11 +18,11 @@ class MIDIController {
 
     initialiseButtons() {
         // Create buttons for each MIDI note
-        Object.entries(MIDI_NOTES).forEach(([noteName, midiNote]) => {
+        MIDI_NOTES.forEach(note => {
             const button = document.createElement("button");
-            button.textContent = noteName;
+            button.textContent = note;
             button.classList.add('midi-button');
-            button.addEventListener('click', () => this.playNote(midiNote));
+            button.addEventListener('click', () => this.playNote(note));
             this.buttonContainer.appendChild(button);
         });
     }
@@ -30,7 +30,7 @@ class MIDIController {
     async playNote(midiNote) {
         try {
             // Standard MIDI velocity
-            const response = await fetch(`/midi-note?note=${midiNote}&velocity=64`);
+            const response = await fetch(`/midi-note?note=${midiNote}`);
 
             if (!response.ok) {
                 throw new Error('Failed to play note');
