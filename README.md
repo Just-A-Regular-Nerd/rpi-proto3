@@ -24,4 +24,4 @@ Clone the repository, then open a terminal within the repo directory and run:
 
 `node server.js`
 
-You should be able to then navigate to http://localhost:3000    
+You should be able to then navigate to http://localhost:3000
