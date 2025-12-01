@@ -6,7 +6,7 @@ const app = express();
 const port = 3000;
 
 // MIDI input setup
-const input = new midi.Input();
+const input = new midi.input();
 
 // Find and open the first available MIDI input device
 function setupMIDIInput() {
@@ -37,7 +37,7 @@ function playMIDINote(note, velocity) {
     // Use FluidSynth to play the note
     const fluidsynth = spawn('fluidsynth', [
         '-ni', // No interactive mode
-        '/usr/share/sounds/sf2/FluidR3_GM.sf2', // Default soundfont
+        '/home/benjamin/Downloads/gm.sf2', // Testing soundfont
         '-r', '44100', // Sample rate
         '-f', '-' // Read from stdin
     ]);
