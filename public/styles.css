@@ -1,21 +1,62 @@
-.midi-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    max-width: 600px;
-    margin: 0 auto;
+/* 1️⃣  Full‑width container */
+#midiButtonContainer {
+    display: flex;                 /* stretch children horizontally */
+    width: 100vw;                  /* fill the viewport width */
+    max-width: 100%;               /* prevent overflow on tiny screens */
+    height: 180px;                 /* height of the white keys */
+    position: relative;           /* for the black‑key overlay */
 }
 
-.midi-button {
-    padding: 15px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
+/* 2️⃣  White keys (the 8 notes you generate) */
+.midi-button.white {
+    flex: 1;
+    background: #fff;
+    border: 1px solid #bbb;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    color: #333;
+    font-weight: bold;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    position: relative;
+    z-index: 1;
+
+    /* ---- NEW: push the label to the bottom ---- */
+    display: flex;               /* make the button a flex container */
+    flex-direction: column;      /* stack children vertically */
+    justify-content: flex-end;   /* align items to the bottom */
+    padding: 0.4rem 0.2rem 0.2rem;/* optional inner spacing (top/right/left) */
 }
 
-.midi-button:hover {
-    background-color: #45a049;
+
+/* 3️⃣  Black keys – only for the notes that have sharps */
+.midi-button.black {
+    flex: 0.5;
+    background: #000;
+    border: 1px solid #bbb;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+
+    /* NEW: align text to the bottom */
+    display: flex;               /* make the button a flex container */
+    flex-direction: column;      /* stack children vertically */
+    justify-content: flex-start; /* start at the top */
+    padding: 0.5rem;             /* optional – give a little inner space */
 }
+
+.midi-button.black::after {
+    content: attr(data-note);    /* use a data attribute for the label */
+    margin-top: auto;            /* pushes the label to the bottom */
+    text-align: center;
+    width: 100%;
+}
+
+/* 4️⃣  Hover / active feedback */
+.midi-button.white:hover { background: #f0f0f0; }
+.midi-button.black:hover { background: #222; }
