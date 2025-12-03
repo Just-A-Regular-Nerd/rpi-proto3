@@ -25,6 +25,9 @@ const MEME_NOTES = {
     'B5': 'xp-insert',
     'C6': 'xp-logon',
     'D6': 'xp-notify',
+    'E6': 'notify-discord',
+    'F6': 'notify-fb',
+    'G6': 'notify-teams'
 }
 
 const BLACK_NOTES = new Set(['C#4','D#4','F#4','G#4','A#4']);
