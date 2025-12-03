@@ -1,13 +1,22 @@
-/* 1️⃣  Full‑width container */
+/* Heading Font */
+h1 {
+    font-family: 'Science Gothic', sans-serif;
+}
+
+p {
+    font-family: 'Tinos', serif;
+    font-size: 20px;
+}
+/* Full‑width container */
 #midiButtonContainer {
     display: flex;                 /* stretch children horizontally */
     width: 100vw;                  /* fill the viewport width */
     max-width: 100%;               /* prevent overflow on tiny screens */
-    height: 180px;                 /* height of the white keys */
+    height: 40vh;                 /* height of the white keys */
     position: relative;           /* for the black‑key overlay */
 }
 
-/* 2️⃣  White keys (the 8 notes you generate) */
+/* White keys (the 8 notes you generate) */
 .midi-button.white {
     flex: 1;
     background: #fff;
@@ -29,7 +38,7 @@
 }
 
 
-/* 3️⃣  Black keys – only for the notes that have sharps */
+/* Black keys – only for the notes that have sharps */
 .midi-button.black {
     flex: 0.5;
     background: #000;
@@ -57,6 +66,6 @@
     width: 100%;
 }
 
-/* 4️⃣  Hover / active feedback */
+/* Hover / active feedback */
 .midi-button.white:hover { background: #f0f0f0; }
 .midi-button.black:hover { background: #222; }
