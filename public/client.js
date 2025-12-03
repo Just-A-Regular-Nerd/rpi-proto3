@@ -15,17 +15,48 @@ const MIDI_NOTES = {
     'C5': 'C5'
 };
 
+// Meme note mapping
+const MEME_NOTES = {
+    'D5': 'xp-critbat',
+    'E5': 'xp-balloon',
+    'F5': 'xp-critstop',
+    'G5': 'xp-default',
+    'A5': 'xp-err',
+    'B5': 'xp-insert',
+    'C6': 'xp-logon',
+    'D6': 'xp-notify',
+}
+
 const BLACK_NOTES = new Set(['C#4','D#4','F#4','G#4','A#4']);
+
+let memeMode = false;
+let noteCount = 0;
 
 class MIDIController {
     constructor() {
         this.buttonContainer = document.getElementById('midiButtonContainer');
+        this.informationContainer = document.getElementById('midiInformationContainer');
         this.initialiseButtons();
     }
 
+    // Create a button that toggles meme mode
+    createMemeModeToggle() {
+        const toggleButton = document.createElement('button');
+        toggleButton.textContent = 'Super Secret Mode';
+        toggleButton.classList.add('meme-mode-toggle');
+
+        toggleButton.addEventListener('click', () => {
+            memeMode = !memeMode;
+
+            this.buttonContainer.innerText = '';
+            this.initialiseButtons();
+        });
+
+        this.buttonContainer.parentElement.insertBefore(toggleButton, this.informationContainer);
+    }
+
     initialiseButtons() {
-        // Create an array of the note names in the order they appear in MIDI_NOTES
-        const noteNames = Object.keys(MIDI_NOTES);
+        const noteNames = !memeMode ? Object.keys(MIDI_NOTES) : Object.keys(MEME_NOTES);
 
         noteNames.forEach((displayName, i) => {
             const button = document.createElement('button');
@@ -34,9 +65,6 @@ class MIDIController {
             // Decide colour
             if (BLACK_NOTES.has(displayName)) {
                 button.classList.add('midi-button', 'black');
-                // i is the index of the current note in the ordered list
-                const idx = i;               // <-- now a valid index
-                // you can use idx here if needed (e.g., for positioning)
             } else {
                 button.classList.add('midi-button', 'white');
             }
@@ -46,17 +74,21 @@ class MIDIController {
         });
     }
 
-
     async playNote(midiNote) {
+        // Meme mode code
+        noteCount++;
+        if(noteCount === 15) {
+            this.createMemeModeToggle();
+        }
+
         try {
             // Standard MIDI velocity
-            let mappedNote = MIDI_NOTES[midiNote];
+            let mappedNote = !memeMode ? MIDI_NOTES[midiNote] : MEME_NOTES[midiNote];
             const response = await fetch(`/midi-note?note=${mappedNote}`);
 
             if (!response.ok) {
                 throw new Error('Failed to play note');
             }
-
             const result = await response.json();
             console.log(result.status);
         } catch (error) {
