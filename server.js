@@ -4,15 +4,17 @@ const player = require('node-wav-player');
 const app = express();
 const port = 3000;
 
-// Play MIDI Note via appropriate wave file
-function playMIDINote(note) {
-    console.log('Playing note: ' + note);
+// Play requested file via appropriate wave file
+function playMIDINote(note, res) {
     player.play({
-        path: './sounds/' + note + '.wav',
+        path: './sounds/' + note + '.wav'
     }).then(() => {
         console.log(`${note} played successfully`);
+        res.json({status: 'Note played'});
     }).catch((error) => {
         console.error(error);
+        console.error(`Note given: ${note}`)
+        res.json({status: 'Error playing note'});
     });
 }
 
@@ -22,9 +24,9 @@ app.get('/midi-note', (req, res) => {
 
     if (note) {
         playMIDINote(
-            note
+            note, res
         );
-        res.json({status: 'Note played'});
+        //res.json({status: 'Note played'});
     } else {
         res.status(400).json({error: 'Invalid MIDI parameters'});
     }
